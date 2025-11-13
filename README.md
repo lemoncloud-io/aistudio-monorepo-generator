@@ -2,8 +2,8 @@
 
 > Transform Google AIStudio React apps into production-ready monorepo in 5 minutes
 
-[![npm version](https://img.shields.io/npm/v/@lemoncloud-io/aistudio-monorepo-generator.svg)](https://www.npmjs.com/package/@lemoncloud-io/aistudio-monorepo-generator)
-[![Downloads](https://img.shields.io/npm/dm/@lemoncloud-io/aistudio-monorepo-generator.svg)](https://www.npmjs.com/package/@lemoncloud-io/aistudio-monorepo-generator)
+[![npm version](https://img.shields.io/npm/v/@lemoncloud/aistudio-monorepo-generator.svg)](https://www.npmjs.com/package/@lemoncloud/aistudio-monorepo-generator)
+[![Downloads](https://img.shields.io/npm/dm/@lemoncloud/aistudio-monorepo-generator.svg)](https://www.npmjs.com/package/@lemoncloud/aistudio-monorepo-generator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Stars](https://img.shields.io/github/stars/lemoncloud-io/aistudio-monorepo-generator.svg?style=social&label=Star)](https://github.com/lemoncloud-io/aistudio-monorepo-generator)
 
@@ -80,13 +80,13 @@ AIStudio App        mono-gen          Production Monorepo
 **Global (recommended):**
 
 ```bash
-npm install -g @lemoncloud-io/aistudio-monorepo-generator
+npm install -g @lemoncloud/aistudio-monorepo-generator
 ```
 
 **Or use npx (no install):**
 
 ```bash
-npx @lemoncloud-io/aistudio-monorepo-generator generate --input ./my-app.zip
+npx @lemoncloud/aistudio-monorepo-generator generate --input ./my-app.zip
 ```
 
 ---
