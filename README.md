@@ -2,8 +2,8 @@
 
 > Transform Google AIStudio React apps into production-ready monorepo in 5 minutes
 
-[![npm version](https://img.shields.io/npm/v/@aistudio/monorepo-generator.svg)](https://www.npmjs.com/package/@aistudio/monorepo-generator)
-[![Downloads](https://img.shields.io/npm/dm/@aistudio/monorepo-generator.svg)](https://www.npmjs.com/package/@aistudio/monorepo-generator)
+[![npm version](https://img.shields.io/npm/v/@lemoncloud-io/aistudio-monorepo-generator.svg)](https://www.npmjs.com/package/@lemoncloud-io/aistudio-monorepo-generator)
+[![Downloads](https://img.shields.io/npm/dm/@lemoncloud-io/aistudio-monorepo-generator.svg)](https://www.npmjs.com/package/@lemoncloud-io/aistudio-monorepo-generator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Stars](https://img.shields.io/github/stars/lemoncloud-io/aistudio-monorepo-generator.svg?style=social&label=Star)](https://github.com/lemoncloud-io/aistudio-monorepo-generator)
 
@@ -26,15 +26,15 @@ Google AIStudio makes prototyping AI apps easy, but the generated code has issue
 
 ### The Solution
 
-```
-AIStudio App          mono-gen          Production Monorepo
+```text
+AIStudio App        mono-gen          Production Monorepo
 ┌──────────┐            →             ┌──────────────┐
 │ Single   │                          │ apps/        │
 │ React    │                          │ ├── backend/ │
 │ + API    │                          │ └── frontend/│
-│ (unsafe) │                          └──────────────┘
-└──────────┘                           Secure & Ready
-  4-8 hours           5 minutes
+│ (unsafe) │                          │ (serverless) │
+└──────────┘                          └──────────────┘
+  4-8 hours           5 minutes        Secure & Ready
 ```
 
 **mono-gen** transforms your prototype into a professional monorepo:
@@ -50,21 +50,25 @@ AIStudio App          mono-gen          Production Monorepo
 ## ✨ Features
 
 ### 🤖 AI-Powered Refactoring
+
 - Gemini 2.5-pro analyzes and transforms your TypeScript/React code
 - Automatically converts client API calls to secure server endpoints
 - Maintains your code style and logic
 
 ### 🔒 Security First
+
 - Moves Gemini API keys from browser to secure backend
 - Creates authenticated REST API endpoints
 - Environment variable management included
 
 ### 📦 Monorepo Architecture
+
 - npm workspace configuration
 - Shared dependencies optimization
 - Independent deployment (backend + frontend)
 
 ### ⚡ Fast & Easy
+
 - One command transformation
 - 5-10 minutes average (vs 4-8 hours manual)
 - Dry-run mode available
@@ -74,13 +78,15 @@ AIStudio App          mono-gen          Production Monorepo
 ## 📦 Installation
 
 **Global (recommended):**
+
 ```bash
-npm install -g @aistudio/monorepo-generator
+npm install -g @lemoncloud-io/aistudio-monorepo-generator
 ```
 
 **Or use npx (no install):**
+
 ```bash
-npx @aistudio/monorepo-generator generate --input ./my-app.zip
+npx @lemoncloud-io/aistudio-monorepo-generator generate --input ./my-app.zip
 ```
 
 ---
@@ -168,7 +174,7 @@ mono-gen list templates
 
 ## 🏗️ Generated Structure
 
-```
+```text
 my-monorepo/
 ├── apps/
 │   ├── backend/              # Serverless API (port 8000)
@@ -235,15 +241,19 @@ export async function generateTitle(topic: string) {
 ## 🎯 Use Cases
 
 ### Rapid Prototyping → Production
-Built a chatbot prototype in AIStudio (2 hours), transformed to production monorepo (5 minutes), deployed to AWS Lambda + Vercel.
+
+> Built a chatbot prototype in AIStudio (2 hours), transformed to production monorepo (5 minutes), deployed to AWS Lambda + Vercel.
 
 ### Learning Full-Stack Development
-Students prototype in AIStudio, then learn monorepo architecture and secure API patterns through generated code.
+
+> Students prototype in AIStudio, then learn monorepo architecture and secure API patterns through generated code.
 
 ### Enterprise Security Compliance
+
 Company policy requires server-side API keys. Transform all AIStudio prototypes automatically before deployment.
 
 ### Startup MVP Development
+
 Fast prototype + instant production structure = same-day deployment. Time to market: 1 day vs 1 week.
 
 ---
@@ -277,12 +287,14 @@ This project is open source, designed for easy understanding and contribution by
 ### Essential Reading
 
 📖 **[ARCHITECTURE.md](ARCHITECTURE.md)** - Understand the codebase
+
 - Architecture patterns (lemon-templates-api)
 - Layer-by-layer explanation
 - Data flow and component interaction
 - How to add features (with examples)
 
 📝 **[CODE_GUIDELINES.md](CODE_GUIDELINES.md)** - Write consistent code
+
 - File naming conventions
 - Code style guide
 - TypeScript best practices
@@ -290,6 +302,7 @@ This project is open source, designed for easy understanding and contribution by
 - Logging guidelines
 
 🤝 **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribute effectively
+
 - Development workflow
 - Pull request process
 - Testing requirements
@@ -308,6 +321,7 @@ This project is open source, designed for easy understanding and contribution by
 ## 📋 Roadmap
 
 ### v0.0.1 - MVP ✅
+
 - Core transformation engine
 - Backend/frontend separation
 - Gemini 2.5-pro refactoring
@@ -326,6 +340,7 @@ This project is open source, designed for easy understanding and contribution by
 | Cost | $$$ | $ |
 
 **Why choose mono-gen?**
+
 - Only tool specialized for AIStudio → Production
 - AI-powered intelligent transformation
 - Zero learning curve

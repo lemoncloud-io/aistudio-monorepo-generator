@@ -17,9 +17,11 @@
 ## 프로젝트 개요
 
 ### 목적
+
 Google AIStudio에서 생성한 React 앱을 프로덕션 준비된 monorepo 구조로 자동 변환하고, Gemini API를 활용한 AI 기반 코드 리팩토링을 수행합니다.
 
 ### 핵심 기능
+
 1. **ZIP 파일 처리**: 로컬 또는 S3에서 AIStudio 앱 다운로드/추출
 2. **템플릿 클론**: GitHub에서 monorepo 템플릿 가져오기
 3. **파일 재구성**: 백엔드/프론트엔드 분리
@@ -32,7 +34,7 @@ Google AIStudio에서 생성한 React 앱을 프로덕션 준비된 monorepo 구
 
 이 프로젝트는 다음과 같은 아키텍처 패턴을 따릅니다.
 
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                    CLI Entry Point                      │
 │                 (사용자 명령어 입력)                        │
@@ -78,7 +80,7 @@ Google AIStudio에서 생성한 React 앱을 프로덕션 준비된 monorepo 구
 
 ## 디렉토리 구조
 
-```
+```text
 src/
 ├── cli.ts                      # CLI 진입점 (Commander.js)
 ├── engine.ts                   # 엔진 - 서비스 초기화
@@ -124,6 +126,7 @@ src/
 **책임**: 사용자 명령어 입력 받기 및 파싱
 
 **주요 코드**:
+
 ```typescript
 program
     .command('generate')
@@ -135,6 +138,7 @@ program
 ```
 
 **중요 포인트**:
+
 - `Commander.js` 사용
 - **Lazy loading**: `require('./engine')`을 action 내부에서 호출 (초기화 시간 단축)
 - 옵션만 파싱, 실제 로직은 Command Layer로 위임
@@ -146,6 +150,7 @@ program
 **책임**: 서비스 초기화 및 의존성 주입
 
 **주요 코드**:
+
 ```typescript
 // 서비스 인스턴스 생성
 const configService = new ConfigService();
@@ -170,6 +175,7 @@ export const $engine = {
 ```
 
 **중요 포인트**:
+
 - **모든 서비스를 한 곳에서 초기화**
 - Constructor 기반 의존성 주입
 - Singleton 패턴 (`$engine` export)
@@ -182,6 +188,7 @@ export const $engine = {
 **책임**: CLI 명령어별 진입점, 옵션 검증, 결과 출력
 
 **구조 패턴**:
+
 ```typescript
 export class GenerateCommand extends AbstractCommand {
     public constructor(
@@ -209,12 +216,14 @@ export class GenerateCommand extends AbstractCommand {
 ```
 
 **중요 포인트**:
+
 - `AbstractCommand`를 상속
 - **UI 관련 코드만** (console.log, chalk 등)
 - 비즈니스 로직은 Service로 위임
 - 에러 핸들링 및 사용자 친화적 메시지
 
 **언제 수정하나요?**
+
 - 새로운 CLI 옵션 추가
 - 출력 형식 변경
 - 사용자 메시지 개선
@@ -228,6 +237,7 @@ export class GenerateCommand extends AbstractCommand {
 #### 4.1 GeneratorService (메인 워크플로우)
 
 **주요 메서드**:
+
 ```typescript
 export class GeneratorService extends AbstractService {
     public constructor(
@@ -264,6 +274,7 @@ export class GeneratorService extends AbstractService {
 ```
 
 **중요 포인트**:
+
 - 전체 워크플로우를 **순차적으로 조율**
 - 각 단계를 private 메서드로 분리
 - 에러 발생 시 throw (Command Layer가 처리)
@@ -271,11 +282,13 @@ export class GeneratorService extends AbstractService {
 #### 4.2 ConfigService (설정 관리)
 
 **설정 우선순위**:
-```
+
+```text
 CLI 옵션 > 설정 파일 > 환경 변수 > 기본값
 ```
 
 **주요 메서드**:
+
 ```typescript
 public async load(options: GenerateOptions): Promise<GeneratorConfig> {
     // 1. 환경 변수에서 로드
@@ -323,6 +336,7 @@ const result = await geminiService.refactor(
 ```
 
 **언제 수정하나요?**
+
 - 워크플로우 변경 (새 단계 추가)
 - 외부 API 통합 변경
 - 비즈니스 로직 개선
@@ -336,6 +350,7 @@ const result = await geminiService.refactor(
 #### 5.1 Abstract Classes
 
 **AbstractCommand**:
+
 ```typescript
 export abstract class AbstractCommand {
     protected constructor(protected readonly name: string) {}
@@ -352,6 +367,7 @@ export abstract class AbstractCommand {
 ```
 
 **AbstractService**:
+
 ```typescript
 export abstract class AbstractService {
     protected constructor(protected readonly name: string) {}
@@ -364,6 +380,7 @@ export abstract class AbstractService {
 #### 5.2 Type System (`types.ts`)
 
 **모든 타입을 한 곳에 정의**:
+
 ```typescript
 // CLI 옵션
 export interface GenerateOptions {
@@ -395,6 +412,7 @@ export interface GeminiConfig {
 ```
 
 **중요 포인트**:
+
 - 모든 인터페이스를 한 파일에 모음
 - export하여 전체 프로젝트에서 사용
 - 타입 안정성 보장
@@ -408,6 +426,7 @@ export interface GeminiConfig {
 #### Logger (`logger.ts`)
 
 **네임스페이스 로깅**:
+
 ```typescript
 const NS = $U.NS('SERVICE', 'cyan');  // [SERVICE] 생성 (파란색)
 _log(NS, 'Starting...');              // [SERVICE] Starting...
@@ -416,6 +435,7 @@ _err(NS, 'Failed');                   // [SERVICE] Failed (빨간색)
 ```
 
 **로그 레벨**:
+
 - `debug` - 상세 디버깅
 - `info` - 일반 정보 (기본값)
 - `warn` - 경고
@@ -427,7 +447,7 @@ _err(NS, 'Failed');                   // [SERVICE] Failed (빨간색)
 
 ### 전체 실행 흐름
 
-```
+```text
 1. 사용자 입력
    $ mono-gen generate -i app.zip -o ./output
 
@@ -494,6 +514,7 @@ const merged = {
 ### 2. 템플릿 시스템 (TemplateService)
 
 **디렉토리 구조**:
+
 ```
 templates/default/
 ├── backend/
@@ -507,6 +528,7 @@ templates/default/
 ```
 
 **config.json 예시**:
+
 ```json
 {
   "name": "default-backend",
@@ -522,6 +544,7 @@ templates/default/
 ```
 
 **프롬프트 렌더링**:
+
 ```typescript
 // user.md에 {{serviceCode}} 변수 사용
 const template = "리팩토링할 코드:\n```typescript\n{{serviceCode}}\n```";
@@ -535,6 +558,7 @@ const rendered = templateService.renderPrompt(template, {
 ### 3. Gemini API 통합 (GeminiService)
 
 **API 호출 구조**:
+
 ```typescript
 const model = client.getGenerativeModel({
     model: 'gemini-2.0-flash-exp',
@@ -560,7 +584,7 @@ const tokens = result.response.usageMetadata?.totalTokenCount;
 
 ### Dependency Graph
 
-```
+```text
 cli.ts
   └─→ engine.ts
        ├─→ ConfigService
@@ -591,6 +615,7 @@ cli.ts
 **예시**: `mono-gen export` 명령어 추가
 
 1. **Service 생성** (`service/export-service.ts`):
+
 ```typescript
 export class ExportService extends AbstractService {
     public constructor() {
@@ -606,6 +631,7 @@ export class ExportService extends AbstractService {
 ```
 
 2. **Command 생성** (`commands/cmd-export.ts`):
+
 ```typescript
 export class ExportCommand extends AbstractCommand {
     public constructor(private readonly service: ExportService) {
@@ -620,6 +646,7 @@ export class ExportCommand extends AbstractCommand {
 ```
 
 3. **Engine 등록** (`engine.ts`):
+
 ```typescript
 import ExportService from './service/export-service';
 import ExportCommand from './commands/cmd-export';
@@ -635,6 +662,7 @@ export const $engine = {
 ```
 
 4. **CLI 등록** (`cli.ts`):
+
 ```typescript
 program
     .command('export')
@@ -651,6 +679,7 @@ program
 **예시**: `projectDescription` 설정 추가
 
 1. **타입 정의** (`cores/types.ts`):
+
 ```typescript
 export interface GeneratorConfig {
     projectName: string;
@@ -660,6 +689,7 @@ export interface GeneratorConfig {
 ```
 
 2. **ConfigService 수정** (`service/config-service.ts`):
+
 ```typescript
 private merge(...): GeneratorConfig {
     return {
@@ -672,6 +702,7 @@ private merge(...): GeneratorConfig {
 ```
 
 3. **CLI 옵션 추가** (`cli.ts`):
+
 ```typescript
 program
     .command('generate')
@@ -684,12 +715,14 @@ program
 **예시**: `serverless` 템플릿 추가
 
 1. **디렉토리 생성**:
+
 ```bash
 mkdir -p src/templates/serverless/backend
 mkdir -p src/templates/serverless/frontend
 ```
 
 2. **설정 파일 작성** (`templates/serverless/backend/config.json`):
+
 ```json
 {
   "name": "serverless-backend",
@@ -706,6 +739,7 @@ mkdir -p src/templates/serverless/frontend
 3. **프롬프트 작성** (`templates/serverless/backend/system.md`, `user.md`)
 
 4. **사용**:
+
 ```bash
 mono-gen generate -i app.zip -o output -t serverless
 ```
@@ -739,20 +773,24 @@ mono-gen generate -i app.zip -o output
 ```
 
 생성되는 파일:
+
 - `logs/backend-refactor.log` - 백엔드 리팩토링 로그
 - `logs/frontend-refactor.log` - 프론트엔드 리팩토링 로그
 
 ### 일반적인 문제 해결
 
 **문제**: "Module not found"
+
 - **원인**: 의존성 미설치
 - **해결**: `npm install`
 
 **문제**: "GEMINI_API_KEY not set"
+
 - **원인**: 환경 변수 미설정
 - **해결**: `export GEMINI_API_KEY="your-key"`
 
 **문제**: 서비스 초기화 에러
+
 - **원인**: 순환 참조
 - **해결**: `engine.ts`에서 의존성 순서 확인
 
@@ -797,6 +835,7 @@ public async loadFromUrl(url: string): Promise<TemplatePreset> {
     return config;
 }
 ```
+
 ---
 
 **최종 수정**: 2025-11-13

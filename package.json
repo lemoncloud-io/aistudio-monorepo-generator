@@ -1,5 +1,5 @@
 {
-  "name": "@aistudio/monorepo-generator",
+  "name": "@lemoncloud/aistudio-monorepo-generator",
   "version": "0.0.1",
   "description": "Transform Google AIStudio React apps into production-ready monorepo with AI-powered refactoring",
   "keywords": [
