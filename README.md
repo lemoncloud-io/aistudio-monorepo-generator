@@ -39,11 +39,11 @@ AIStudio App        mono-gen          Production Monorepo
 
 **mono-gen** transforms your prototype into a professional monorepo:
 
-✅ Automatic backend/frontend separation
-✅ Secure API key management (server-side)
-✅ Modern monorepo structure (npm workspace)
-✅ AI-powered refactoring (Gemini 2.5-pro)
-✅ Production-ready architecture
+- ✅ Automatic backend/frontend separation
+- ✅ Secure API key management (server-side)
+- ✅ Modern monorepo structure (npm workspace)
+- ✅ AI-powered refactoring (Gemini 2.5-pro)
+- ✅ Production-ready architecture
 
 ---
 
