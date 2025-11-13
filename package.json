@@ -1,0 +1,70 @@
+{
+  "name": "@aistudio/monorepo-generator",
+  "version": "0.0.1",
+  "description": "Transform Google AIStudio React apps into production-ready monorepo with AI-powered refactoring",
+  "keywords": [
+    "aistudio",
+    "monorepo",
+    "cli-tool",
+    "code-generator",
+    "typescript",
+    "react",
+    "gemini",
+    "serverless",
+    "refactoring",
+    "devtools",
+    "google-gemini",
+    "ai-powered"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "mono-gen": "./dist/cli.js"
+  },
+  "scripts": {
+    "dev": "ts-node src/cli.ts",
+    "build": "tsc -p tsconfig.build.json && npm run copy-templates",
+    "copy-templates": "mkdir -p dist/templates && cp -r src/templates/* dist/templates/",
+    "watch": "tsc -p tsconfig.build.json --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lemoncloud-io/aistudio-monorepo-generator.git"
+  },
+  "author": "LemonCloud <support@lemoncloud.io>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "axios": "^1.7.7",
+    "chalk": "^4.1.2",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "inquirer": "^8.2.6",
+    "js-yaml": "^4.1.0",
+    "mustache": "^4.2.0",
+    "ora": "^5.4.1"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^8.2.10",
+    "@types/jest": "^29.5.13",
+    "@types/js-yaml": "^4.0.9",
+    "@types/mustache": "^4.2.5",
+    "@types/node": "^22.7.5",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
+    "eslint": "^8.57.1",
+    "jest": "^29.7.0",
+    "prettier": "^3.3.3",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "default-backend",
+  "description": "Default backend refactoring preset for monorepo",
+  "fileMap": {
+    "serviceCode": "apps/backend/src/services/geminiService.ts",
+    "typeCode": "apps/backend/src/services/types.ts",
+    "apiCode": "apps/backend/src/api/hello-api.ts"
+  },
+  "outputMap": {
+    "serviceCode": "apps/backend/src/services/geminiService.ts",
+    "apiCode": "apps/backend/src/api/hello-api.ts"
+  },
+  "optional": ["typeCode"]
+}
