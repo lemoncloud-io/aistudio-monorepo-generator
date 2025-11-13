@@ -1,0 +1,13 @@
+{
+  "name": "default-frontend",
+  "description": "Default frontend refactoring preset for monorepo",
+  "fileMap": {
+    "serviceCode": "apps/frontend/src/services/geminiService.ts",
+    "componentCode": "apps/frontend/src/App.tsx"
+  },
+  "outputMap": {
+    "serviceCode": "apps/frontend/src/services/apiService.ts",
+    "componentCode": "apps/frontend/src/App.tsx"
+  },
+  "optional": []
+}
